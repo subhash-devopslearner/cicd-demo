@@ -1,4 +1,14 @@
-def add(a, b):
-    return a + b
+from flask import Flask
 
-print(add(2, 3))  # Output: 5
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello from my CI/CD pipeline! 🚀"
+
+@app.route('/add/<int:a>/<int:b>')
+def add(a, b):
+    return {"result": a + b}
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

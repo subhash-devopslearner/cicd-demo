@@ -56,20 +56,3 @@ jobs:
 
       - name: Run tests
         run: pytest test_app.py
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test          # Only runs if test job passes ✅
-    if: github.ref == 'refs/heads/main'   # Only on main branch
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: Deploy to Railway
-        run: railway up --detach
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

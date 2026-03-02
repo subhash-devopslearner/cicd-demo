@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello from my CI/CD pipeline! 🚀"
+    return "Hello from my CI/CD pipeline! 🚀 from {{ env.GITHUB_REF }}"
 
 @app.route('/add/<int:a>/<int:b>')
 def add(a, b):

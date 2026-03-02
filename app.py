@@ -1,14 +1,20 @@
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
+# Read environment variable
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
+
 @app.route('/')
 def home():
-    return "Hello from my CI/CD pipeline! 🚀"
+    return f"Hello from my CI/CD pipeline! 🚀 You are on: {ENVIRONMENT} environment 🌍"
 
 @app.route('/add/<int:a>/<int:b>')
 def add(a, b):
     return {"result": a + b}
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    
+    app.run(host='0.0.0.0', port=port)    
